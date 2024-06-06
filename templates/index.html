@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ecom Chat Support</title>
+
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        h1,
+        h2 {
+            color: #333;
+        }
+
+        div {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        input[type="submit"] {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        p {
+            margin: 0;
+        }
+
+        /* Chatbot styling */
+        .chat-container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .user-message {
+            background-color: #52c656;
+            color: #fff;
+            padding: 8px 12px;
+            margin: 5px 0;
+            border-radius: 8px;
+            align-self: flex-end;
+        }
+
+        .bot-message {
+            background-color: #6fb0dc;
+            color: #fff;
+            padding: 8px 12px;
+            margin: 5px 0;
+            border-radius: 8px;
+            align-self: flex-start;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>ECom Chat Support</h1>
+
+    <div class="chat-container">
+        {% for message in conversation %}
+        {% if message.role == 'user' %}
+        <div class="user-message">
+            <h2>User Prompt:</h2>
+            <p>{{ message.content }}</p>
+        </div>
+        {% elif message.role == 'assistant' %}
+        <div class="bot-message">
+            <h2>Answer:</h2>
+            <p>{{ message.content }}</p>
+        </div>
+        {% endif %}
+        {% endfor %}
+
+        <form method="POST" action="/">
+            <label for="user_prompt">Enter your question:</label>
+            <input type="text" id="user_prompt" name="user_prompt">
+
+            <input type="submit" value="Ask Question">
+        </form>
+    </div>
+</body>
+
+</html>
